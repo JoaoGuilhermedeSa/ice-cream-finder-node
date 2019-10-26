@@ -15,7 +15,8 @@ exports.list_ice_cream_places = function (req, res) {
 let getReviews = async function (body, success) {
     let result = await Promise.all(body.businesses.map(async (b) =>
         getReview(b).then((res) => res))).catch(err => console.log(err));
-    success(result);
+        body.businesses = result;
+    success(body);
 }
 
 let getReview = function (b) {
